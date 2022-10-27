@@ -1,0 +1,72 @@
+.btn {
+  width: 15rem;
+  height: 5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  @include border;
+  margin: $smallpad 0;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+
+  &::after{
+    content: "";
+    border-radius: 25px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    z-index: -1;
+    transform: scale(1.2);
+    transition: transform 1s ease-in-out, opacity 300ms;
+  }
+
+  &--full {
+    background-color: $c-dark;
+    color: $c-light;
+
+    &::after{
+      transform: translateX(-50%);
+      background-color: $c-light;
+    }
+    
+    &:hover{
+      &::after{
+        transform: translateX(180%) scaleX(1.5);
+        opacity: 1;
+      }
+    }
+
+    &:not(:last-of-type){
+      margin-right: $smallpad;
+
+      @include break(750px){
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+  
+  &--outline:not(:nth-child(2)){
+    margin: 0 $smallpad 0 $smallpad;
+  }
+
+  &--outline{
+    &::after{
+      transform: translateX(50%);
+      background-color: $c-dark;
+    }
+    &:hover{
+      &::after{
+        transform: translateX(-180%) scaleX(1.5);
+        opacity: 1;
+      }
+    }
+  }
+
+  &:active{
+        transform: scale(1.2);
+  }
+}
